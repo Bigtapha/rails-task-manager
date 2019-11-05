@@ -1,11 +1,19 @@
 <h1>My tasks</h1>
 
 <% @tasks.each do |task| %>
+<div class="tasks">
 <% if task.completed == true %>
-<input type="checkbox" name=<%= task.title %> checked> <%= link_to task.title, task_path(task) %><br>
+<input type="checkbox" name=<%= task.title %> checked> <br> 
 <% else %>
-<input type="checkbox" name=<%= task.title %>> <%= link_to task.title, task_path(task) %><br>
+<input type="checkbox" name=<%= task.title %>> <br>
 <% end %>
+<%= link_to task.title, task_path(task) %>
+<%= link_to destroy_path(task),  method: :delete, data: { confirm: 'Are you sure?' } do %>
+  <%= image_tag('recycle_icon.png', alt:"delete", width:20, height:20) %>
 <% end %>
 
-<%= link_to "Add a new task", "/tasks" %>
+</div>
+<% end %>
+
+<br>
+<%= link_to 'Add a new task', new_task_path %>
